@@ -718,12 +718,14 @@ static float z_vel = 0;
 		self.playableWords = [[NSMutableArray alloc] init];
 
 		[self revealWords:YES];
-		NSArray *words = [[[[self valueForKey:@"wordList"] valueForKey:@"words_string"] stringByReplacingOccurrencesOfString:@"?" withString:@""] componentsSeparatedByString:@"|"].mutableCopy;
+		NSMutableArray *words = [[[[self valueForKey:@"wordList"] valueForKey:@"words_string"] stringByReplacingOccurrencesOfString:@"?" withString:@""] componentsSeparatedByString:@"|"].mutableCopy;
 
 		for (NSString *word in words) {
 			if ([self checkWord:word flag:0])
 				[self.playableWords addObject:word];
 		}
+
+		alert(self.view, @"Words", [words componentsJoinedByString:@"\n"]);
 	}
 
 	if (self.playableWords.count) {
